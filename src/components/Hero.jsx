@@ -64,65 +64,36 @@
 // export default Hero;
 
 import React from 'react';
-import { Typewriter } from 'react-simple-typewriter';
 
 const Hero = () => {
   return (
-    <section className="relative bg-white min-h-screen flex items-center justify-center px-4 md:px-16 py-10">
+    // Inside Hero.jsx or wherever your container is
+<section className="min-h-screen bg-white flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-16 lg:px-24 py-16" id="home">
 
-      {/* Terminal Stretching Full Width */}
-      <div className="relative w-full bg-black text-green-400 font-mono p-8 rounded-2xl shadow-xl max-w-[1000px] mx-auto">
-        <p className="mb-4 text-green-500 font-bold">&gt; whoami</p>
-        <p className="text-green-300 mb-6 text-lg font-semibold">
-        <Typewriter
-            words={[
-              'Rakshit Shah – Data Scientist & ML Engineer',
-            ]}
-            loop={false}
-            cursor
-            cursorStyle="_"
-            typeSpeed={40}
-            deleteSpeed={0}
-            delaySpeed={2000}
-          />
-          </p>
-
-        <p className="mb-4 text-green-500 font-bold">&gt; cat profile.txt</p>
-        <p className="text-green-300 mb-6 text-lg font-semibold">
-          <Typewriter
-            words={[
-              'Specialized in GenAI, LLMs, Multimodal AI, and Responsible AI.',
-            ]}
-            loop={false}
-            cursor
-            cursorStyle="_"
-            typeSpeed={40}
-            deleteSpeed={0}
-            delaySpeed={2000}
-          />
-        </p>
-
-        <p className="mb-2 text-green-500 font-bold">&gt; open resume.pdf</p>
-        <a
-          href="/RakshitShah_Resume.pdf"
-          className="inline-block bg-green-600 text-black font-bold px-4 py-2 mt-2 rounded hover:bg-green-400 transition"
-        >
-          Download Resume
-        </a>
-
-        {/* Rakshit Image - Overlapping on Right */}
-        <div className="absolute -right-10 -bottom-10 md:-right-20 md:-bottom-12 z-20">
-          <img
-            src="/Rakshit.png"
-            alt="Rakshit Shah"
-            className="w-[220px] md:w-[340px] lg:w-[400px] object-contain drop-shadow-2xl"
-          />
-        </div>
+      
+      {/* Text Content */}
+      <div className="text-center md:text-left font-bold  max-w-xl md:mr-8">
+        <p className="text-2xl text-gray-600 mb-2">Hey, I am Rakshit Shah</p>
+        
+        <h1 className="text-4xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-relaxed mb-6">
+          I create <span className="text-indigo-600 ">Machine Learning Models</span> and integrate <br className="hidden sm:block" />them in day to day life
+        </h1>
+        
+        <button className="bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-500 transition">
+          Get In Touch
+        </button>
       </div>
 
+      {/* Hero Image */}
+      <div className="mb-10 md:mb-0">
+        <img
+          src="/Rakshit.png"
+          alt="Rakshit Shah"
+          className="w-[380px] md:w-[460px] lg:w-[540px] object-contain mx-auto"
+        />
+      </div>
     </section>
   );
 };
 
 export default Hero;
-
