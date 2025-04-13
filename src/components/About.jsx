@@ -10,25 +10,29 @@ const About = () => {
 
   const handleSend = async () => {
     if (!input.trim()) return;
-
+  
     const newMessages = [...messages, { type: 'user', text: input }];
     setMessages(newMessages);
     setInput('');
     setLoading(true);
-
+  
     try {
-      const response = await axios.post('http://localhost:5050/chat', {
-        message: input,
+      const response = await axios.post('http://localhost:8000/chat', {
+        question: input,
       });
-
-      setMessages([...newMessages, { type: 'bot', text: response.data.reply }]);
+  
+      setMessages([...newMessages, { type: 'bot', text: response.data.answer }]);
     } catch (error) {
       console.error(error);
-      setMessages([...newMessages, { type: 'bot', text: '⚠️ Sorry, something went wrong contacting the server.' }]);
+      setMessages([...newMessages, {
+        type: 'bot',
+        text: '⚠️ Sorry, something went wrong contacting the server.',
+      }]);
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <section id="about" className="py-24 px-6 lg:px-24 bg-gray-50 min-h-screen">
