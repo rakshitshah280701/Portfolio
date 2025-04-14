@@ -17,7 +17,7 @@ const About = () => {
     setLoading(true);
   
     try {
-      const response = await axios.post('http://178.156.174.84:8000/chat', {
+      const response = await axios.post('https://178.156.174.84:8000/chat', {
         question: input,
       });
   
