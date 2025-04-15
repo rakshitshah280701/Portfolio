@@ -16,7 +16,14 @@ function App() {
       .then(() => console.log("✅ Backend wake-up ping sent"))
       .catch(err => console.error("❌ Wake-up failed:", err));
   }, []);
-  
+
+  // 📍 Log visitor's IP/location to Slack
+  useEffect(() => {
+    axios.get('/api/log-visit')
+      .then(() => console.log("📍 Visitor location logged to Slack"))
+      .catch(err => console.error("❌ Failed to log visit:", err));
+  }, []);
+
   return (
     <div className="App scroll-smooth">
       <Navbar />
