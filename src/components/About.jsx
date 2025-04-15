@@ -8,12 +8,12 @@ const About = () => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // ✅ Ping backend wake endpoint on first render
-  useEffect(() => {
-    axios.get("/api/wake")
-      .then(() => console.log("💡 Wake server ping sent"))
-      .catch((err) => console.error("❌ Wake ping failed:", err));
-  }, []);
+  // // ✅ Ping backend wake endpoint on first render
+  // useEffect(() => {
+  //   axios.get("/api/wake")
+  //     .then(() => console.log("💡 Wake server ping sent"))
+  //     .catch((err) => console.error("❌ Wake ping failed:", err));
+  // }, []);
 
   const handleSend = async () => {
     if (!input.trim()) return;

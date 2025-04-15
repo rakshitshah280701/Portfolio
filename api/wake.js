@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
     const HETZNER_TOKEN = process.env.HETZNER_TOKEN;
-    const SERVER_ID = "your_server_id_here"; // Replace with actual server ID
+    const SERVER_ID = "62886040"; // Replace with actual server ID
   
     try {
       const response = await fetch(`https://api.hetzner.cloud/v1/servers/${SERVER_ID}/actions/poweron`, {
