@@ -1,25 +1,35 @@
 export default async function handler(req, res) {
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '0.0.0.0';
-    const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK;
-  
     try {
-      // Get geolocation info
-      const geo = await fetch(`http://ip-api.com/json/${ip}`).then(res => res.json());
+      const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   
-      const location = `${geo.city}, ${geo.country}`;
-      const message = `🌍 *New visitor from* ${location}\n🔗 Website: https://rakshitai.info`;
+      const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+      const geo = await geoResponse.json();
   
-      // Send to Slack
-      await fetch(SLACK_WEBHOOK, {
-        method: "POST",
-        body: JSON.stringify({ text: message }),
-        headers: { "Content-Type": "application/json" },
+      const {
+        city, region, country_name, postal, timezone, latitude, longitude
+      } = geo;
+  
+      const slackMessage = {
+        text: `📍 *New Website Visitor!*
+  
+  • 🌐 *IP Address:* ${ip}
+  • 🏙️ *Location:* ${city || "?"}, ${region || "?"}, ${country_name || "?"}
+  • 📮 *Postal Code:* ${postal || "?"}
+  • 🌎 *Timezone:* ${timezone || "?"}
+  • 🗺️ *Map:* https://www.google.com/maps?q=${latitude},${longitude}`
+      };
+  
+      await fetch(process.env.SLACK_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(slackMessage),
       });
   
-      res.status(200).json({ status: "logged" });
+      return res.status(200).json({ status: "logged" });
+  
     } catch (error) {
-      console.error("❌ Failed to log visitor:", error);
-      res.status(500).json({ error: "Failed to log visit" });
+      console.error("Slack notify error:", error);
+      return res.status(500).json({ status: "error", error: error.message });
     }
   }
   
