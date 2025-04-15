@@ -16,6 +16,15 @@ function App() {
       .then(() => console.log("✅ Backend wake-up ping sent"))
       .catch(err => console.error("❌ Wake-up failed:", err));
   }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      axios.get("/api/ping")
+        .then(() => console.log("🛡️ Silent ping sent"))
+        .catch((err) => console.error("❌ Silent ping failed", err));
+    }, 30000); // every 30 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
 
   // 📍 Log visitor's IP/location to Slack
   useEffect(() => {
