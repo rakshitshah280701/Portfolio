@@ -64,19 +64,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("🔁 useEffect - silent ping initialized");
     const interval = setInterval(() => {
-      console.log("⏱️ Sending silent ping...");
-      axios.get("https://www.rakshitai.info/ping")
+      axios.get(`https://www.rakshitai.info/ping?timestamp=${new Date().getTime()}`)
         .then(() => console.log("🛡️ Silent ping sent"))
         .catch((err) => console.error("❌ Silent ping failed", err));
-    }, 30000);
-
-    return () => {
-      console.log("🛑 Silent ping interval cleared");
-      clearInterval(interval);
-    };
+    }, 3000);
   }, []);
+  
 
   useEffect(() => {
     console.log("📍 useEffect - logging visitor");
