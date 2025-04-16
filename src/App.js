@@ -68,7 +68,7 @@ function App() {
       axios.get(`https://www.rakshitai.info/ping?timestamp=${new Date().getTime()}`)
         .then(() => console.log("🛡️ Silent ping sent"))
         .catch((err) => console.error("❌ Silent ping failed", err));
-    }, 3000);
+    }, 30000);
   }, []);
   
 
