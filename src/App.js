@@ -67,7 +67,7 @@ function App() {
     console.log("🔁 useEffect - silent ping initialized");
     const interval = setInterval(() => {
       console.log("⏱️ Sending silent ping...");
-      axios.get("https://rakshitai.info/ping")
+      axios.get("https://www.rakshitai.info/ping")
         .then(() => console.log("🛡️ Silent ping sent"))
         .catch((err) => console.error("❌ Silent ping failed", err));
     }, 30000);
