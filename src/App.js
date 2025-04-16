@@ -71,6 +71,24 @@ function App() {
     }, 30000);
   }, []);
   
+  useEffect(() => {
+    console.log("🔁 Silent keepalive pings initialized");
+  
+    const interval = setInterval(() => {
+      console.log("📡 Sending keepalive ping...");
+      fetch("/api/keepalive")
+        .then((res) => {
+          if (!res.ok) throw new Error("Ping failed");
+          return res.json();
+        })
+        .then((data) => console.log("✅ Keepalive response:", data))
+        .catch((err) => console.log("❌ Silent ping failed", err.message));
+    }, 60000);
+  
+    return () => clearInterval(interval);
+  }, []);
+  
+  
 
   useEffect(() => {
     console.log("📍 useEffect - logging visitor");
