@@ -32,7 +32,8 @@ const Contact = () => {
       <h2 className="text-4xl font-bold text-gray-800 mb-10">Contact</h2>
 
       {/* Contact Info Row */}
-      <div className="bg-indigo-600 text-white rounded-full py-4 px-6 shadow-lg flex flex-wrap justify-center items-center space-x-6 max-w-6xl mx-auto">
+      <div className="bg-indigo-600 text-white inline-flex flex-wrap justify-center items-center gap-8 px-8 py-4 rounded-full shadow-xl">
+
         <div className="flex items-center space-x-2">
           <FaEnvelope className="text-xl" />
           <span>rakshitrajeshshah1@gmail.com</span>

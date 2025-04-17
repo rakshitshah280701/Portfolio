@@ -67,9 +67,13 @@ const Hero = () => {
       <div className={`flex flex-wrap justify-center gap-4 mt-10 transition-all duration-700 ${step >= 4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
         {step >= 4 && (
           <>
-            <button className="bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-500 transition">
-              Get In Touch
-            </button>
+            <a
+  href="#contact"
+  className="bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-500 transition"
+>
+  Get In Touch
+</a>
+
 
             <a
               href="/RakshitShah_Resume.pdf"
