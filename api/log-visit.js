@@ -44,12 +44,11 @@
 
 export default async function handler(req, res) {
     try {
-      // Step 1: Get public IP using api.ipify.org
-      const ipResponse = await fetch('https://api.ipify.org?format=json');
-      const ipData = await ipResponse.json();
-      const ip = ipData.ip;
+      // 🛠️ Step 1: Extract client IP address from request headers
+      const forwarded = req.headers["x-forwarded-for"];
+      const ip = forwarded ? forwarded.split(",")[0] : req.socket.remoteAddress;
   
-      // Step 2: Get location info using ip-api.com
+      // 🌍 Step 2: Get location info from the actual visitor IP
       const geoResponse = await fetch(`http://ip-api.com/json/${ip}`);
       const geo = await geoResponse.json();
   
@@ -63,13 +62,13 @@ export default async function handler(req, res) {
         lon: longitude,
       } = geo;
   
-      // Step 3: Generate Google Maps link
+      // 🗺️ Step 3: Generate Google Maps link
       let mapLink = '';
       if (latitude && longitude) {
         mapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
       }
   
-      // Step 4: Slack message formatting
+      // 📡 Step 4: Prepare Slack message
       const slackMessage = {
         text: `📍 *New Website Visitor!*
   
@@ -80,7 +79,7 @@ export default async function handler(req, res) {
   ${mapLink ? `• 🗺️ *Map:* <${mapLink}|Open in Google Maps>` : ''}`
       };
   
-      // Step 5: Send to Slack
+      // 📤 Step 5: Send to Slack
       await fetch(process.env.SLACK_WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
