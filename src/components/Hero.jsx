@@ -29,15 +29,27 @@ const Hero = () => {
         </div>
 
         {/* I am Rakshit Shah */}
-        <div className={`transition-all duration-700 ${step >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          {step >= 1 && (
-            <Typewriter
-              words={['I am Rakshit Shah']}
-              cursor={false}
-              typeSpeed={80}
-            />
-          )}
-        </div>
+        <div className={`transition-all duration-700 ${step >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} flex justify-center`}>
+  {step >= 1 && (
+    <div className="text-3xl sm:text-4xl md:text-5xl font-bold flex flex-wrap justify-center">
+      <Typewriter
+        words={['I am']}
+        cursor={false}
+        typeSpeed={80}
+        onType={() => {}}
+      />
+      &nbsp;
+      <span className="text-indigo-600">
+        <Typewriter
+          words={['Rakshit Shah']}
+          cursor={false}
+          typeSpeed={80}
+        />
+      </span>
+    </div>
+  )}
+</div>
+
 
         {/* I create ML Models */}
         <div className={`text-2xl sm:text-3xl font-medium text-gray-800 transition-all duration-700 ${step >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
@@ -45,7 +57,7 @@ const Hero = () => {
             <Typewriter
               words={['I create Machine Learning Models']}
               cursor={false}
-              typeSpeed={50}
+              typeSpeed={80}
             />
           )}
         </div>
@@ -57,7 +69,7 @@ const Hero = () => {
               words={['and integrate them in day to day life']}
               cursor
               cursorStyle="|"
-              typeSpeed={50}
+              typeSpeed={80}
             />
           )}
         </div>
