@@ -1,96 +1,94 @@
-// import React from 'react';
-// import { FaLinkedin, FaGithub } from 'react-icons/fa';
-
-// const Hero = () => {
-//   return (
-//     <section className="min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-white to-blue-50">
-//       <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        
-//         {/* LEFT: Text content */}
-//         <div>
-//           <h1 className="text-5xl font-bold text-blue-700 mb-4">
-//             Hi, I’m Rakshit Shah 👋
-//           </h1>
-//           <h2 className="text-2xl text-gray-800 mb-4">
-//             Data Scientist & Machine Learning Engineer
-//           </h2>
-//           <p className="text-gray-600 mb-6 max-w-md">
-//             Specialized in Generative AI, LLMs, and Multimodal AI. Passionate about Responsible AI and building impactful solutions with ML, NLP, and CV.
-//           </p>
-
-//           {/* Buttons */}
-//           <div className="flex gap-4 mb-6">
-//             <a
-//               href="/RakshitShah_Resume.pdf"
-//               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition shadow"
-//             >
-//               Download Resume
-//             </a>
-//             <a
-//               href="#contact"
-//               className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-100 transition"
-//             >
-//               Contact Me
-//             </a>
-//           </div>
-
-//           {/* Social Icons */}
-//           <div className="flex gap-4 text-2xl text-blue-600">
-//             <a href="https://github.com/rakshitshah280701" target="_blank" rel="noopener noreferrer">
-//               <FaGithub />
-//             </a>
-//             <a href="https://linkedin.com/in/rakshitshah28" target="_blank" rel="noopener noreferrer">
-//               <FaLinkedin />
-//             </a>
-//           </div>
-//         </div>
-
-//         {/* RIGHT: Profile Image */}
-//         <div className="flex justify-center">
-//           <div className="w-60 h-60 rounded-full overflow-hidden shadow-lg border-4 border-blue-200">
-//             <img
-//               src="/Rakshit.jpg"
-//               alt="Rakshit Shah"
-//               className="w-full h-full object-cover"
-//             />
-//           </div>
-//         </div>
-
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Hero;
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Typewriter } from 'react-simple-typewriter';
 
 const Hero = () => {
-  return (
-    // Inside Hero.jsx or wherever your container is
-<section className="min-h-screen bg-white flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-16 lg:px-24 py-16" id="home">
+  const [step, setStep] = useState(0);
 
+  useEffect(() => {
+    const delays = [2000, 2000, 3000, 3000]; // Timing for each message step
+    if (step < delays.length) {
+      const timer = setTimeout(() => setStep(step + 1), delays[step]);
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
+
+  return (
+    <section className="min-h-screen bg-white flex flex-col items-center justify-center px-6 py-16 text-center" id="home">
       
-      {/* Text Content */}
-      <div className="text-center md:text-left font-bold  max-w-xl md:mr-8">
-        <p className="text-2xl text-gray-600 mb-2">Hey, I am Rakshit Shah</p>
+      <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-snug space-y-4">
         
-        <h1 className="text-4xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-relaxed mb-6">
-          I create <span className="text-indigo-600 ">Machine Learning Models</span> and integrate <br className="hidden sm:block" />them in day to day life
-        </h1>
-        
-        <button className="bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-500 transition">
-          Get In Touch
-        </button>
+        {/* Hello */}
+        <div className={`transition-all duration-700 ${step >= 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          {step >= 0 && (
+            <Typewriter
+              words={['Hello!']}
+              cursor={false}
+              typeSpeed={80}
+            />
+          )}
+        </div>
+
+        {/* I am Rakshit Shah */}
+        <div className={`transition-all duration-700 ${step >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          {step >= 1 && (
+            <Typewriter
+              words={['I am Rakshit Shah']}
+              cursor={false}
+              typeSpeed={80}
+            />
+          )}
+        </div>
+
+        {/* I create ML Models */}
+        <div className={`text-2xl sm:text-3xl font-medium text-gray-800 transition-all duration-700 ${step >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          {step >= 2 && (
+            <Typewriter
+              words={['I create Machine Learning Models']}
+              cursor={false}
+              typeSpeed={50}
+            />
+          )}
+        </div>
+
+        {/* and integrate them... */}
+        <div className={`text-2xl sm:text-3xl font-medium text-gray-800 transition-all duration-700 ${step >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          {step >= 3 && (
+            <Typewriter
+              words={['and integrate them in day to day life']}
+              cursor
+              cursorStyle="|"
+              typeSpeed={50}
+            />
+          )}
+        </div>
       </div>
 
-      {/* Hero Image */}
-      <div className="mb-10 md:mb-0">
-        <img
-          src="/Rakshit.png"
-          alt="Rakshit Shah"
-          className="w-[380px] md:w-[460px] lg:w-[540px] object-contain mx-auto"
-        />
+      {/* ✅ CTA Buttons Aligned Horizontally */}
+      <div className={`flex flex-wrap justify-center gap-4 mt-10 transition-all duration-700 ${step >= 4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        {step >= 4 && (
+          <>
+            <button className="bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-500 transition">
+              Get In Touch
+            </button>
+
+            <a
+              href="/RakshitShah_Resume.pdf"
+              download
+              className="group inline-flex items-center justify-center gap-2 text-indigo-600 border border-indigo-600 px-5 py-2 rounded-md font-medium hover:bg-indigo-600 hover:text-white transition-all duration-300"
+            >
+              <span>Download Resume</span>
+              <svg
+                className="w-4 h-4 transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
+              </svg>
+            </a>
+          </>
+        )}
       </div>
     </section>
   );
