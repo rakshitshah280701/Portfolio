@@ -92,10 +92,31 @@ function App() {
   
 
   useEffect(() => {
-    console.log("📍 useEffect - logging visitor");
-    axios.get('/api/log-visit')
-      .then(() => console.log("📍 Visitor location logged to Slack"))
-      .catch(err => console.error("❌ Failed to log visit:", err));
+    console.log("📍 useEffect - logging visitor IP from client");
+  
+    async function logVisitor() {
+      try {
+        const ipRes = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipRes.json();
+        const ip = ipData.ip;
+  
+        console.log("🌐 Visitor IP:", ip);
+  
+        await fetch('/api/log-visit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ ip }),
+        });
+  
+        console.log("📍 Visitor location sent to Slack");
+      } catch (err) {
+        console.error("❌ Error logging visitor:", err);
+      }
+    }
+  
+    logVisitor();
   }, []);
 
   return (
