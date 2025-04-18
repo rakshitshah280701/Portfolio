@@ -31,7 +31,7 @@ const Contact = () => {
     <section className="bg-indigo-50 py-16 text-center" id="contact">
       <h2 className="text-4xl font-bold text-gray-800 mb-10">Contact</h2>
 
-      {/* Contact Info Row */}
+      {/* Contact Info Row
       <div className="bg-indigo-600 text-white inline-flex flex-wrap justify-center items-center gap-8 px-8 py-4 rounded-full shadow-xl">
 
         <div className="flex items-center space-x-2">
@@ -46,7 +46,38 @@ const Contact = () => {
           <FaLinkedin className="text-xl" />
           <span>rakshitshah28</span>
         </div>
-      </div>
+      </div> */}
+
+      {/* Contact Info Row */}
+<div className="bg-indigo-600 text-white inline-flex flex-wrap justify-center items-center gap-8 px-8 py-4 rounded-full shadow-xl">
+  <div className="flex items-center space-x-2">
+    <FaEnvelope className="text-xl" />
+    <span>rakshitrajeshshah1@gmail.com</span>
+  </div>
+  <div className="flex items-center space-x-2">
+    <FaGithub className="text-xl" />
+    <a
+      href="https://github.com/rakshitshah280701"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:underline"
+    >
+      rakshitshah280701
+    </a>
+  </div>
+  <div className="flex items-center space-x-2">
+    <FaLinkedin className="text-xl" />
+    <a
+      href="https://www.linkedin.com/in/rakshitshah28/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:underline"
+    >
+      rakshitshah28
+    </a>
+  </div>
+</div>
+
 
       {/* Contact Form */}
       <form onSubmit={handleSubmit} className="mt-8 max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
