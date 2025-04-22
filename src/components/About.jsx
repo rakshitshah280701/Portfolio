@@ -38,7 +38,7 @@ const About = () => {
     checkBackend(); // initial ping
     const interval = setInterval(checkBackend, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [serverStatus]);
 
   const handleSend = async () => {
     if (!input.trim() || serverStatus !== 'online') return;
@@ -76,6 +76,14 @@ const About = () => {
     loading: 'Waking Up...',
     online: 'Server Ready',
   }[serverStatus];
+
+const suggestedPrompts = [
+  "Tell about Rakshit’s Projects?",
+  "What are his technical skills?",
+  "When is Rakshit graduating?",
+  "What are his leadership skills?",
+  "Explain his InstructAware project"
+];
 
   return (
     <section id="about" className="py-24 px-6 lg:px-24 bg-gray-50 min-h-screen">
@@ -121,6 +129,19 @@ const About = () => {
           )}
         </div>
 
+{/* 💡 Suggested Prompts */}
+<div className="flex flex-wrap gap-2 mb-4">
+{suggestedPrompts.map((prompt, idx) => (
+  <button
+    key={idx}
+    onClick={() => setInput(prompt)}
+    className="px-4 py-1 border border-gray-400 rounded-full text-sm hover:bg-gray-100 transition"
+  >
+    {prompt}
+  </button>
+))}
+</div>
+
         {/* Input area */}
         <div className="flex items-center space-x-2">
           <input
@@ -146,3 +167,4 @@ const About = () => {
 };
 
 export default About;
+
