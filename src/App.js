@@ -1,58 +1,13 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Hero from './components/Hero';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import Project from './components/Project';
 import Contact from './components/Contact';
+import Research from './components/Research';
+import ProjectDetail from './components/ProjectDetail';
 import axios from 'axios';
-
-
-
-// function App() {
-//   console.log("✅ App.js is mounted and running");
-
-
-//   // 🚀 Ping backend when site is loaded
-//   useEffect(() => {
-//     axios.get('/api/wake')
-//       .then(() => console.log("✅ Backend wake-up ping sent"))
-//       .catch(err => console.error("❌ Wake-up failed:", err));
-//   }, []);
-  
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       console.log("⏱️ About to send silent ping...");  // <- ADD THIS
-//       axios.get("/api/ping")
-//         .then(() => console.log("🛡️ Silent ping sent"))
-//         .catch((err) => console.error("❌ Silent ping failed", err));
-//     }, 30000);
-  
-//     return () => clearInterval(interval);
-//   }, []);
-  
-
-//   // 📍 Log visitor's IP/location to Slack
-//   useEffect(() => {
-//     axios.get('/api/log-visit')
-//       .then(() => console.log("📍 Visitor location logged to Slack"))
-//       .catch(err => console.error("❌ Failed to log visit:", err));
-//   }, []);
-
-//   return (
-//     <div className="App scroll-smooth">
-//       <Navbar />
-//       <main className="pt-32 md:pt-28">
-//         <Hero />
-//         <About />
-//         <Project />
-
-//       </main>
-//     </div>
-//   );
-// }
-
-// export default App;
-
 
 function App() {
   console.log("✅ App.js is mounted and running");
@@ -70,6 +25,9 @@ function App() {
         .then(() => console.log("🛡️ Silent ping sent"))
         .catch((err) => console.error("❌ Silent ping failed", err));
     }, 30000);
+    
+    // Cleanup function to clear the interval when component unmounts
+    return () => clearInterval(interval);
   }, []);
   
   useEffect(() => {
@@ -120,15 +78,23 @@ function App() {
   }, []);
 
   return (
-    <div className="App scroll-smooth">
-      <Navbar />
-      <main className="pt-32 md:pt-28">
-        <Hero />
-        <About />
-        <Project />
-        <Contact />
-      </main>
-    </div>
+    <Router>
+      <div className="App scroll-smooth">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={
+            <main className="pt-32 md:pt-28">
+              <Hero />
+              <About />
+              <Project />
+              <Research />
+              <Contact />
+            </main>
+          } />
+          <Route path="/project/:id" element={<ProjectDetail />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 export default App;

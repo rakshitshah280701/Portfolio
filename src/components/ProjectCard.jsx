@@ -40,15 +40,20 @@
 
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ProjectCard = ({ title, description, image, github, demo, tags }) => {
+const ProjectCard = ({ id, title, description, image, github, demo, tags }) => {
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
       {image && (
-        <img src={image} alt={title} className="rounded-lg mb-4 h-48 object-cover w-full" />
+        <Link to={`/project/${id}`}>
+          <img src={image} alt={title} className="rounded-lg mb-4 h-48 object-cover w-full hover:opacity-90 transition" />
+        </Link>
       )}
 
-      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <Link to={`/project/${id}`} className="hover:text-purple-700 transition">
+        <h3 className="text-xl font-bold mb-2">{title}</h3>
+      </Link>
       <p className="text-gray-600 text-sm mb-4">{description}</p>
 
       {tags && (
@@ -82,6 +87,12 @@ const ProjectCard = ({ title, description, image, github, demo, tags }) => {
             Live Demo
           </a>
         )}
+        <Link
+          to={`/project/${id}`}
+          className="text-sm bg-purple-600 text-white px-4 py-1.5 rounded hover:bg-purple-700 transition ml-auto"
+        >
+          View Details
+        </Link>
       </div>
     </div>
   );
