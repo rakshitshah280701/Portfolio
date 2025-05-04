@@ -242,11 +242,11 @@ const About = () => {
   }[serverStatus];
 
   const suggestedPrompts = [
-    "Tell about Rakshit’s Projects?",
+    "Tell about StockSage?",
     "What are his technical skills?",
-    "When is Rakshit graduating?",
+    
     "What are his leadership skills?",
-    "Explain his InstructAware project"
+    "Explain InstructAware project"
   ];
 
   return (
