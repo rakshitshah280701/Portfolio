@@ -187,7 +187,7 @@ const About = () => {
   }, [messages, loading]);
 
   useEffect(() => {
-    axios.get("https://api.rakshitai.info/ping")
+    axios.get("/ping")
       .then(() => setServerStatus('online'))
       .catch(() => setServerStatus('offline'));
   }, []);
