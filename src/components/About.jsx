@@ -180,14 +180,12 @@ const About = () => {
   const [serverStatus, setServerStatus] = useState('loading');
   const chatContainerRef = useRef(null);
 
-  // Auto scroll to latest message
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages, loading]);
 
-  // Only ONE initial ping to check server status
   useEffect(() => {
     axios.get("https://api.rakshitai.info/ping")
       .then(() => setServerStatus('online'))
@@ -208,10 +206,6 @@ const About = () => {
       });
 
       setMessages([...newMessages, { type: 'bot', text: response.data.answer }]);
-
-      // ✅ Notify backend of activity only after actual user interaction
-      await axios.post('https://api.rakshitai.info/keepalive');
-
     } catch (error) {
       console.error(error);
       setMessages([...newMessages, {
