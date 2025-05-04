@@ -180,16 +180,28 @@ const About = () => {
   const [serverStatus, setServerStatus] = useState('loading');
   const chatContainerRef = useRef(null);
 
+  // ✅ Scroll to bottom when messages update
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages, loading]);
 
+  // ✅ Health check to ping server
   useEffect(() => {
-    axios.get("/ping")
-      .then(() => setServerStatus('online'))
-      .catch(() => setServerStatus('offline'));
+    setServerStatus('loading');
+    const checkBackend = async () => {
+      try {
+        await axios.get('https://api.rakshitai.info/ping');
+        setServerStatus('online');
+      } catch {
+        setServerStatus('offline');
+      }
+    };
+
+    checkBackend();
+    const interval = setInterval(checkBackend, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleSend = async () => {
@@ -206,8 +218,7 @@ const About = () => {
       });
 
       setMessages([...newMessages, { type: 'bot', text: response.data.answer }]);
-    } catch (error) {
-      console.error(error);
+    } catch {
       setMessages([...newMessages, {
         type: 'bot',
         text: '⚠️ Sorry, something went wrong contacting the server.',
@@ -217,6 +228,7 @@ const About = () => {
     }
   };
 
+  // ✅ Color + Text mappings
   const statusColor = {
     offline: 'bg-red-500',
     loading: 'bg-yellow-400',
@@ -245,7 +257,10 @@ const About = () => {
         Ask me anything to learn more about his journey in AI, Machine Learning, and impactful tech!
       </p>
 
+      {/* Chatbot UI */}
       <div className="relative bg-white shadow-lg rounded-xl p-6 w-full max-w-4xl mx-auto min-h-[500px]">
+
+        {/* ✅ Status Indicator */}
         <div className="absolute top-4 right-4 flex items-center space-x-2">
           <div className="relative w-3 h-3">
             <div className={`absolute inset-0 rounded-full ${statusColor} opacity-75 animate-ping`} />
@@ -254,6 +269,7 @@ const About = () => {
           <span className="text-sm text-gray-600">{statusText}</span>
         </div>
 
+        {/* Chat Messages */}
         <div
           ref={chatContainerRef}
           className="h-[30rem] overflow-y-auto pr-2 mb-4 space-y-4 transition-all duration-300"
@@ -277,6 +293,7 @@ const About = () => {
           )}
         </div>
 
+        {/* Prompts */}
         <div className="flex flex-wrap gap-2 mb-4">
           {suggestedPrompts.map((prompt, idx) => (
             <button
@@ -289,6 +306,7 @@ const About = () => {
           ))}
         </div>
 
+        {/* Input */}
         <div className="flex items-center space-x-2">
           <input
             type="text"
