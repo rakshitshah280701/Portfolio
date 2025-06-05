@@ -34,18 +34,18 @@ const Navbar = () => {
               navigate('/');
             }}>
               <img
-                src="/rakshitshah_logo1.png"
-                alt="Rakshit Logo"
-                className="h-14 w-auto object-contain"
-              />
+  src="/Rakshit.svg"
+  alt="Rakshit Logo"
+  className="h-20 w-auto object-contain"
+/>
             </a>
           ) : (
             <a href="#home">
               <img
-                src="/rakshitshah_logo1.png"
-                alt="Rakshit Logo"
-                className="h-14 w-auto object-contain"
-              />
+  src="/Rakshit.svg"
+  alt="Rakshit Logo"
+  className="h-20 w-auto object-contain"
+/>
             </a>
           )}
         </div>

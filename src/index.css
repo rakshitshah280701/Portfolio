@@ -1,7 +1,37 @@
 html {
-    scroll-behavior: smooth;
-  }
+  scroll-behavior: smooth;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 👇 Floating animation keyframes */
+@keyframes float1 {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes float2 {
+  0% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-30px) translateX(10px); }
+  100% { transform: translateY(0px) translateX(0px); }
+}
+
+@keyframes float3 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(15px) rotate(20deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* 👇 Utility classes used in Hero.jsx */
+.animate-float1 {
+  animation: float1 3s ease-in-out infinite;
+}
+.animate-float2 {
+  animation: float2 4s ease-in-out infinite;
+}
+.animate-float3 {
+  animation: float3 3.5s ease-in-out infinite;
+}
