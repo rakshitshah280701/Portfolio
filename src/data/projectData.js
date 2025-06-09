@@ -1,5 +1,66 @@
 const projects = [
   {
+    id: 'instructaware',
+    title: 'InstructAware: Generative Instructional Narration',
+    description: 'Real-time situational narration using YOLOv8, OCR, and fine-tuned LLMs. Trained and evaluated multiple encoder-decoder and decoder-only models.',
+    detailedDescription: `InstructAware is a research-grade project that generates instructional scene descriptions using computer vision and generative language models. Built for accessibility use cases (e.g., low vision), it combines YOLOv8, OCR, and fine-tuned LLMs (T5, GPT-3.5, DeepSeek, and a Transformer trained from scratch) to generate contextual instructions from real-world scenes.
+
+This project involved training and evaluating both encoder-decoder and decoder-only architectures across qualitative and quantitative benchmarks, leading to a comparative performance analysis. The Android-based deployment allows real-time inference on live scenes via camera feed.`,
+    image: '/instructaware.png', // ensure this image is placed in `public/projects/`
+    github: 'https://github.com/rakshitshah280701/InstructAware',
+    demo: '',
+    tags: ['YOLOv8', 'OCR', 'LLMs', 'Android', 'T5', 'GPT-3.5', 'DeepSeek', 'Multimodal'],
+    showArchitecture: false,
+    skills: [
+      'Fine-tuned encoder-decoder (T5) and decoder-only (GPT, DeepSeek) models',
+      'Scene understanding using YOLOv8 + OCR',
+      'Qualitative and quantitative benchmarking',
+      'Multimodal dataset creation and evaluation',
+      'Real-time Android deployment of generative AI',
+    ],
+    challenges: [
+      {
+        title: 'Training on Multimodal Data',
+        description: 'Curating and aligning image-scene pairs with instruction sequences required extensive preprocessing and format control.',
+      },
+      {
+        title: 'Comparing Architectures',
+        description: 'To evaluate model performance effectively, we used a combination of automatic metrics and user-centric qualitative testing.',
+      },
+    ],
+  },
+  {
+    id: "smartsign",
+    title: "Scene Sense (Android App)",
+    description:
+      "An Android application that uses InstructAware System to detect road signs and shop boards, aiding real-time navigation for low-vision individuals by providing real time Narrative generation through LLM GPT3.5.",
+    image: "/scenesense1.png", // Place your image in /public folder
+    github: "https://github.com/rakshitshah280701/SmartSignNavigation-Android",
+    demo: "", // Add a demo link if hosted (APK or Play Store)
+    tags: ["Android", "YOLOv8", "TensorFlow Lite", "CameraX", "Java"],
+    detailedDescription: 
+      "Smart Sign Navigation is an Android application designed to assist individuals with low vision in navigating urban environments. The app leverages computer vision and natural language processing to detect road signs, shop boards, and other visual navigational cues, converting them into audio feedback.\n\nThe core detection system is built with YOLOv8, optimized and deployed using TensorFlow Lite to ensure efficient operation on mobile devices. The app utilizes Android's CameraX API for reliable and efficient camera access, providing real-time processing of the user's surroundings.\n\nWhat sets this app apart is its integration with GPT-3.5, which generates natural-sounding narratives based on detected objects. Rather than simply stating what signs are present, the app provides contextual information and guidance, making navigation more intuitive for users.",
+    skills: [
+      "Optimizing and deploying computer vision models on mobile devices",
+      "Working with Android's CameraX API for real-time video processing",
+      "Implementing efficient on-device inference with TensorFlow Lite",
+      "Integrating OpenAI's API for natural language generation",
+      "Designing accessible user interfaces for individuals with visual impairments"
+    ],
+    challenges: [
+      {
+        title: "On-Device Performance",
+        description: "Balancing model accuracy with performance was crucial. We implemented model quantization and pruning techniques to reduce the model size by 70% while maintaining 92% of the original accuracy."
+      },
+      {
+        title: "Battery Optimization",
+        description: "Continuous camera usage and model inference resulted in high battery consumption. We developed an adaptive processing rate that adjusts based on movement speed and available battery, extending usage time significantly."
+      }
+    ]
+  },
+  
+
+  {
     id: "stocksage",
     title: "StockSage",
     description:
@@ -37,35 +98,7 @@ const projects = [
       }
     ]
   },
-  {
-    id: "smartsign",
-    title: "Smart Sign Navigation (Android App)",
-    description:
-      "An Android application that uses YOLOv8 and TensorFlow Lite to detect road signs and shop boards, aiding real-time navigation for low-vision individuals by providing real time Narrative generation through LLM GPT3.5.",
-    image: "/SmartSign.png", // Place your image in /public folder
-    github: "https://github.com/rakshitshah280701/SmartSignNavigation-Android",
-    demo: "", // Add a demo link if hosted (APK or Play Store)
-    tags: ["Android", "YOLOv8", "TensorFlow Lite", "CameraX", "Java"],
-    detailedDescription: 
-      "Smart Sign Navigation is an Android application designed to assist individuals with low vision in navigating urban environments. The app leverages computer vision and natural language processing to detect road signs, shop boards, and other visual navigational cues, converting them into audio feedback.\n\nThe core detection system is built with YOLOv8, optimized and deployed using TensorFlow Lite to ensure efficient operation on mobile devices. The app utilizes Android's CameraX API for reliable and efficient camera access, providing real-time processing of the user's surroundings.\n\nWhat sets this app apart is its integration with GPT-3.5, which generates natural-sounding narratives based on detected objects. Rather than simply stating what signs are present, the app provides contextual information and guidance, making navigation more intuitive for users.",
-    skills: [
-      "Optimizing and deploying computer vision models on mobile devices",
-      "Working with Android's CameraX API for real-time video processing",
-      "Implementing efficient on-device inference with TensorFlow Lite",
-      "Integrating OpenAI's API for natural language generation",
-      "Designing accessible user interfaces for individuals with visual impairments"
-    ],
-    challenges: [
-      {
-        title: "On-Device Performance",
-        description: "Balancing model accuracy with performance was crucial. We implemented model quantization and pruning techniques to reduce the model size by 70% while maintaining 92% of the original accuracy."
-      },
-      {
-        title: "Battery Optimization",
-        description: "Continuous camera usage and model inference resulted in high battery consumption. We developed an adaptive processing rate that adjusts based on movement speed and available battery, extending usage time significantly."
-      }
-    ]
-  },
+  
   {
     id: "hearthealth",
     title: "Heart Health Predictor",

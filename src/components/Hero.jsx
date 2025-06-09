@@ -148,13 +148,13 @@ const Hero = () => {
   };
 
   const images = [
-    '/gallery/image1.jpg',
+    '/gallery/image7.jpg',
     '/gallery/image2.jpg',
     '/gallery/image3.jpg',
     '/gallery/image4.jpg',
     '/gallery/image5.jpg',
     '/gallery/image6.jpg',
-    '/gallery/image7.jpg',
+    '/gallery/image1.jpg',
     '/gallery/image8.jpg',
   ];
 
@@ -227,7 +227,7 @@ const Hero = () => {
         </div>
 
         {/* Right - Slideshow Card */}
-        <div className="w-full md:w-1/2 flex justify-center">
+        {/* <div className="w-full md:w-1/2 flex justify-center">
           <div className="w-[400px] h-[600px] rounded-2xl overflow-hidden shadow-2xl bg-white border border-gray-200">
             <Slider {...sliderSettings}>
               {images.map((src, idx) => (
@@ -242,6 +242,35 @@ const Hero = () => {
             </Slider>
           </div>
         </div>
+         */}
+
+         {/* Desktop Slider - hidden on mobile */}
+<div className="hidden sm:flex w-full md:w-1/2 justify-center">
+  <div className="w-[400px] h-[600px] rounded-2xl overflow-hidden shadow-2xl bg-white border border-gray-200">
+    <Slider {...sliderSettings}>
+      {images.map((src, idx) => (
+        <div key={idx} className="flex items-center justify-center h-full w-full">
+          <img
+            src={src}
+            alt={`Slide ${idx + 1}`}
+            className="h-full w-full object-cover rounded-2xl"
+          />
+        </div>
+      ))}
+    </Slider>
+  </div>
+</div>
+
+{/* Mobile Static Image - hidden on desktop */}
+<div className="sm:hidden w-full flex justify-center">
+  <div className="w-[300px] h-[450px] rounded-2xl overflow-hidden shadow-2xl bg-white border border-gray-200">
+    <img
+      src={images[0]}
+      alt="Hero mobile"
+      className="h-full w-full object-cover rounded-2xl"
+    />
+  </div>
+</div>
       </div>
     </section>
   );

@@ -47,7 +47,20 @@ const ProjectCard = ({ id, title, description, image, github, demo, tags }) => {
     <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
       {image && (
         <Link to={`/project/${id}`}>
-          <img src={image} alt={title} className="rounded-lg mb-4 h-48 object-cover w-full hover:opacity-90 transition" />
+          {image && (
+  <Link to={`/project/${id}`}>
+    <img
+      src={image}
+      alt={title}
+      className={`rounded-lg mb-4 h-48 w-full transition hover:opacity-90 ${
+        id === 'instructaware' || id === 'smartsign'
+          ? 'object-contain bg-gray-50 p-2'
+          : 'object-cover'
+      }`}
+    />
+  </Link>
+)}
+
         </Link>
       )}
 
