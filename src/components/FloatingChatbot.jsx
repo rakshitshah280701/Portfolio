@@ -6,7 +6,10 @@ import axios from 'axios';
 const FloatingChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { type: 'bot', text: 'Hi! I am an LLM-powered Chatbot trained on Rakshit Shah’s projects and resume. Ask me anything!' }
+    {
+      type: 'bot',
+      text: 'Hi! I am an LLM-powered Chatbot trained on Rakshit Shah’s projects and resume. Ask me anything!',
+    },
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,34 +17,71 @@ const FloatingChatbot = () => {
   const chatRef = useRef(null);
 
   const suggestedPrompts = [
-    "Tell about StockSage?",
-    "What are his technical skills?",
-    "What are his leadership skills?",
-    "Explain InstructAware project"
+    'Tell about StockSage?',
+    'What are his technical skills?',
+    'What are his leadership skills?',
+    'Explain InstructAware project',
   ];
 
-  // Auto scroll to bottom
+  // Auto scroll
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
   }, [messages, loading]);
 
-  // Trigger backend wake + ping when user opens chat
+  // Handle chat open + wake server
   const handleOpen = async () => {
     setIsOpen(true);
+
     if (serverStatus === 'idle') {
       setServerStatus('loading');
+      setMessages((prev) => [
+        ...prev,
+        { type: 'bot', text: '🔄 Waking up RakshitAI... please wait a few seconds.' },
+      ]);
+
       try {
         await axios.get('/api/wake');
-        await axios.get('https://api.rakshitai.info/ping');
-        setServerStatus('online');
       } catch {
-        setServerStatus('offline');
+        // continue to ping anyway
       }
+
+      // Ping in interval
+      let attempts = 0;
+      const maxAttempts = 5;
+
+      const checkServer = async () => {
+        try {
+          const res = await axios.get('https://api.rakshitai.info/ping');
+          if (res.status === 200) {
+            setServerStatus('online');
+            setMessages((prev) => [
+              ...prev,
+              { type: 'bot', text: '✅ RakshitAI is ready. Ask me anything!' },
+            ]);
+          } else {
+            throw new Error('Still sleeping');
+          }
+        } catch {
+          attempts++;
+          if (attempts < maxAttempts) {
+            setTimeout(checkServer, 4000); // wait 4s and retry
+          } else {
+            setServerStatus('offline');
+            setMessages((prev) => [
+              ...prev,
+              { type: 'bot', text: '❌ Failed to wake RakshitAI. Try again later.' },
+            ]);
+          }
+        }
+      };
+
+      checkServer();
     }
   };
 
+  // Handle send message
   const handleSend = async () => {
     if (!input.trim() || serverStatus !== 'online') return;
 
@@ -57,10 +97,10 @@ const FloatingChatbot = () => {
 
       setMessages([...newMessages, { type: 'bot', text: response.data.answer }]);
     } catch {
-      setMessages([...newMessages, {
-        type: 'bot',
-        text: '⚠️ Sorry, something went wrong contacting the server.',
-      }]);
+      setMessages([
+        ...newMessages,
+        { type: 'bot', text: '⚠️ Sorry, something went wrong contacting the server.' },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -98,13 +138,22 @@ const FloatingChatbot = () => {
           {/* Header */}
           <div className="bg-purple-600 text-white px-4 py-2 flex justify-between items-center">
             <span className="font-semibold">Chat with Rakshit’s AI</span>
-            <button onClick={() => setIsOpen(false)} className="text-white font-bold">×</button>
+            <button onClick={() => setIsOpen(false)} className="text-white font-bold">
+              ×
+            </button>
           </div>
 
-          {/* Chat Messages */}
+          {/* Messages */}
           <div ref={chatRef} className="flex-1 overflow-y-auto px-4 py-2 space-y-2 text-sm">
             {messages.map((msg, i) => (
-              <div key={i} className={`p-2 rounded-lg ${msg.type === 'user' ? 'bg-purple-100 text-purple-900 ml-auto' : 'bg-gray-200 text-gray-800'}`}>
+              <div
+                key={i}
+                className={`p-2 rounded-lg ${
+                  msg.type === 'user'
+                    ? 'bg-purple-100 text-purple-900 ml-auto'
+                    : 'bg-gray-200 text-gray-800'
+                }`}
+              >
                 {msg.text}
               </div>
             ))}
@@ -126,10 +175,15 @@ const FloatingChatbot = () => {
 
           {/* Input */}
           <div className="flex items-center px-3 py-2 border-t">
-            <span className={`w-2 h-2 rounded-full mr-2 ${statusColor}`} title={statusText}></span>
+            <span
+              className={`w-2 h-2 rounded-full mr-2 ${statusColor}`}
+              title={statusText}
+            ></span>
             <input
               className="flex-grow text-sm border border-gray-300 rounded-md px-3 py-1 mr-2 focus:outline-none"
-              placeholder={serverStatus === 'online' ? "Ask something..." : statusText}
+              placeholder={
+                serverStatus === 'online' ? 'Ask something...' : statusText
+              }
               disabled={loading || serverStatus !== 'online'}
               value={input}
               onChange={(e) => setInput(e.target.value)}
