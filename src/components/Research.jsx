@@ -1,5 +1,7 @@
 import React from 'react';
 import ResearchPaper from './ResearchPaper';
+import { motion } from 'framer-motion';
+
 
 // Research publications data
 const researchData = [
@@ -57,24 +59,31 @@ const researchData = [
 
 const Research = () => {
   return (
-    <section id="research" className="py-16 px-6 md:px-16">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Research Publications</h2>
-        <p className="text-gray-600 mb-10 max-w-3xl">
-          My academic research focuses on the intersection of artificial intelligence and practical applications in healthcare and computer vision.
-        </p>
-        
-        <div className="space-y-8">
-          {researchData.map(paper => (
-            <ResearchPaper 
-              key={paper.id}
-              {...paper}
-            />
-          ))}
+    <section id="research" className="pt-12 pb-24 px-6 md:px-16 bg-white">
+      <motion.div
+        className="bg-violet-50 rounded-xl px-8 py-10 shadow-sm"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-5xl font-extrabold text-gray-900 mb-10">Research Publications</h2>
+
+          <p className="text-lg text-gray-700 mb-10 max-w-3xl">
+            My academic research focuses on the intersection of artificial intelligence and practical applications in healthcare and computer vision.
+          </p>
+
+          <div className="space-y-8">
+            {researchData.map((paper) => (
+              <ResearchPaper key={paper.id} {...paper} />
+            ))}
+          </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
+
 
 export default Research; 
