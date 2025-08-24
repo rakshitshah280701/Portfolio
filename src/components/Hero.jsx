@@ -216,7 +216,7 @@ const Hero = () => {
               <a href="#contact" className="bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-500 transition">
                 Get In Touch
               </a>
-              <a href="/Rakshit_Shah_Resume.pdf" download className="group inline-flex items-center justify-center gap-2 text-indigo-600 border border-indigo-600 px-5 py-2 rounded-md font-medium hover:bg-indigo-600 hover:text-white transition-all duration-300">
+              <a href="/Resume_Rakshit_Shah.pdf" download className="group inline-flex items-center justify-center gap-2 text-indigo-600 border border-indigo-600 px-5 py-2 rounded-md font-medium hover:bg-indigo-600 hover:text-white transition-all duration-300">
                 <span>Download Resume</span>
                 <svg className="w-4 h-4 transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />

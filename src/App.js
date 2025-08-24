@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Hero from './components/Hero';
 import Navbar from './components/Navbar';
 import About from './components/About';
+import Experience from './components/Experience';
+import Education from './components/Education';
+import Volunteering from './components/Volunteering';
 import Project from './components/Project';
 import Contact from './components/Contact';
 import Research from './components/Research';
@@ -48,6 +51,9 @@ function App() {
             <main className="pt-32 md:pt-28">
               <Hero />
               <About />
+              <Experience />
+              <Education />
+              <Volunteering />
               <Project />
               <Research />
               <Contact />

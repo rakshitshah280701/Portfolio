@@ -54,9 +54,12 @@ const Navbar = () => {
         {!isProjectPage && (
           <nav className="hidden md:flex space-x-8 text-gray-700 font-bold">
             <a href="#home" className="text-purple-600">Home</a>
+            <a href="#about" className="hover:text-purple-600">About me</a>
+            <a href="#experience" className="hover:text-purple-600">Experience</a>
+            <a href="#education" className="hover:text-purple-600">Education</a>
+            <a href="#volunteering" className="hover:text-purple-600">Volunteering</a>
             <a href="#portfolio" className="hover:text-purple-600">Projects</a>
             <a href="#research" className="hover:text-purple-600">Research</a>
-            <a href="#about" className="hover:text-purple-600">About me</a>
           </nav>
         )}
 
@@ -116,12 +119,15 @@ const Navbar = () => {
         <div className="md:hidden mt-2 bg-white shadow-lg rounded-xl px-6 py-4">
           <nav className="flex flex-col space-y-3 text-gray-700 font-medium">
             <a href="#home" className="text-purple-600">Home</a>
+            <a href="#about" className="hover:text-purple-600">About me</a>
+            <a href="#experience" className="hover:text-purple-600">Experience</a>
+            <a href="#education" className="hover:text-purple-600">Education</a>
+            <a href="#volunteering" className="hover:text-purple-600">Volunteering</a>
             <a href="#portfolio" className="hover:text-purple-600">Projects</a>
             <a href="#research" className="hover:text-purple-600">Research</a>
-            <a href="#about" className="hover:text-purple-600">About me</a>
             <a
               href="#contact"
-              className="border border-purple-600 text-purple-600 px-4 py-1.5 rounded-lg hover:bg-purple-100 transition"
+              className="border border-purple-600 px-4 py-1.5 rounded-lg hover:bg-purple-100 transition"
             >
               Contact Me
             </a>

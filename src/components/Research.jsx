@@ -71,7 +71,6 @@ const Research = () => {
           <h2 className="text-5xl font-extrabold text-gray-900 mb-10">Research Publications</h2>
 
           <p className="text-lg text-gray-700 mb-10 max-w-3xl">
-            My academic research focuses on the intersection of artificial intelligence and practical applications in healthcare and computer vision.
           </p>
 
           <div className="space-y-8">
